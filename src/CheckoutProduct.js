@@ -5,7 +5,7 @@ import { useStateValue } from "./StateProvider";
 import FlipMove from "react-flip-move";
 import Fade from "react-reveal/Fade";
 
-function CheckoutProduct({ id, title, image, price, rating }) {
+function CheckoutProduct({ id, title, image, price, rating, hideButton }) {
   const [{ basket }, dispatch] = useStateValue();
 
   const removeFromBasket = () => {
@@ -30,10 +30,14 @@ function CheckoutProduct({ id, title, image, price, rating }) {
               {Array(rating)
                 .fill()
                 .map((_, i) => (
-                  <p>⭐</p>
+                  <span role="img" aria-label="star">
+                    ⭐
+                  </span>
                 ))}
             </div>
-            <button onClick={removeFromBasket}>Remove From Basket</button>
+            {!hideButton && (
+              <button onClick={removeFromBasket}>Remove from Basket</button>
+            )}
           </div>
         </div>
       </FlipMove>
